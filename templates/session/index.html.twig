@@ -3,18 +3,15 @@
 {% block title %}Hello SessionController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Ajouter Session</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/younes/SessionYounes/src/Controller/SessionController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/younes/SessionYounes/templates/session/index.html.twig</code></li>
-    </ul>
-</div>
+
+
+    {{ form_row(session.nbPlace) }}
+    {{ form_row(session.dateDebut) }}
+    {{ form_row(session.dateFin) }}
+
+    <button type="submit" class="btn">Register</button>
+{{ form_end(sessionForm) }}
 {% endblock %}
