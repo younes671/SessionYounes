@@ -31,6 +31,9 @@ class Session
     #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'session', orphanRemoval: true)]
     private Collection $programmes;
 
+    #[ORM\Column(length: 80, nullable: true)]
+    private ?string $titre = null;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
@@ -132,8 +135,21 @@ class Session
         return $this;
     }
 
+    
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+    
+    public function setTitre(?string $titre): static
+    {
+        $this->titre = $titre;
+        
+        return $this;
+    }
+    
     public function __toString()
     {
-        return $this->id;
+        return $this->titre;
     }
 }
