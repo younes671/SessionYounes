@@ -15,7 +15,8 @@
         {% if app.user %}
             <a href="{{ path('app_logout') }}">Se déconnecter</a>
             <a href="">Mon profil</a>
-            <a href="{{ path('app_session') }}">Ajouter une session</a>
+            <a href="{{ path('new_session') }}">Ajouter une session</a>
+            <a href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a>
         {% else %}
             <a href="{{ path('app_register') }}">S'inscrire</a>
         {% endif %}
