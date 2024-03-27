@@ -3,17 +3,21 @@
 {% block title %}Ajouter Stagiaire{% endblock %}
 
 {% block body %}
-<h1>Ajouter Stagiaire</h1>
+    {% if edit %}
+    <h1>Editer un stagiaire</h1> 
+    {% else %}
+    <h1>Ajouter un stagiaire</h1>
+    {% endif %}
 
     
-    {{ form_start(formAddStagiaire) }}
-    {{ form_row(formAddStagiaire.nom) }}
-    {{ form_row(formAddStagiaire.prenom) }}
-    {{ form_row(formAddStagiaire.dateNaissance) }}
-    {{ form_row(formAddStagiaire.email) }}
-    {{ form_row(formAddStagiaire.adresse) }}
-    {{ form_row(formAddStagiaire.cp) }}
-    {{ form_row(formAddStagiaire.ville) }}
-    {{ form_end(formAddStagiaire) }}
+        {{ form_start(formAddStagiaire) }}
+        {{ form_row(formAddStagiaire.nom) }}
+        {{ form_row(formAddStagiaire.prenom) }}
+        {{ form_row(formAddStagiaire.dateNaissance) }}
+        {{ form_row(formAddStagiaire.email) }}
+        {{ form_row(formAddStagiaire.adresse) }}
+        {{ form_row(formAddStagiaire.cp) }}
+        {{ form_row(formAddStagiaire.ville) }}
+        {{ form_end(formAddStagiaire) }}
 
 {% endblock %}

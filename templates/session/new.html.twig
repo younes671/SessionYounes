@@ -3,13 +3,17 @@
 {% block title %}Ajouter Session{% endblock %}
 
 {% block body %}
-<h1>Ajouter Session</h1>
+    {% if edit %}
+    <h1>Editer une session</h1> 
+    {% else %}
+    <h1>Ajouter une session</h1>
+    {% endif %}
 
-    
-    {{ form_start(formAddSession) }}
-    {{ form_row(formAddSession.nbPlace) }}
-    {{ form_row(formAddSession.dateDebut) }}
-    {{ form_row(formAddSession.dateFin) }}
-    {{ form_end(formAddSession) }}
+        
+        {{ form_start(formAddSession) }}
+        {{ form_row(formAddSession.nbPlace) }}
+        {{ form_row(formAddSession.dateDebut) }}
+        {{ form_row(formAddSession.dateFin) }}
+        {{ form_end(formAddSession) }}
 
 {% endblock %}
