@@ -3,12 +3,14 @@
 {% block title %}Détail d'un stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Détail d'un stagiaire</h1>
-    
- 
+<div class="detail">
+    <h1>Fiche stagiaire</h1>
+
     <h2>{{ stagiaire }}</h2>
-    <p>
-       
+    <p class="stagiaire">
+        {{ stagiaire.email }}
     </p>
+</div>
+    
 
 {% endblock %}
