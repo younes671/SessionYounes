@@ -15,7 +15,8 @@
         <div class="nav-bar">
             {% if app.user %}
             <div class="nav">
-                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                <a href="{{ path('app_home') }}">Home</a>
                 <a href="{{ path('app_session') }}">Liste session</a>
                 <a href="{{ path('app_stagiaire') }}">Liste stagiaire</a>
             </div>

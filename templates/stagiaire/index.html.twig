@@ -3,15 +3,23 @@
 {% block title %}Hello StagiaireController!{% endblock %}
 
 {% block body %}
-
-<h1>Liste des stagiaires</h1>
+    {% if app.user %}
+        <div class="list">
+            <h1>Liste des stagiaires</h1>
+                
+            <a class="btn btn-success" href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a><br>
+            
+            {% for stagiaire in stagiaires %}
+                <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> 
+                <a class="btn btn-warning" href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}">Edit</a>
+                <a class="btn btn-danger" href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">Delete</a><br>
+            {% endfor %} 
+        </div>
+    {% else %}
+        <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
+{% endif %}
     
-<a class="btn btn-success" href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a><br>
+    
 
-{% for stagiaire in stagiaires %}
-    <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> 
-    <a class="btn btn-warning" href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}">Edit</a>
-    <a class="btn btn-danger" href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">Delete</a><br>
-{% endfor %} 
 
 {% endblock %}

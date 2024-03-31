@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,5 +73,12 @@ class SessionController extends AbstractController
         return $this->render('session/show.html.twig', [
             'session' => $session
         ]);
+    }
+
+    #[Route('/session/{id}/addStagiaire', name: 'addStagiaire_session')]
+    public function addStagiaire(Stagiaire $stagiaire)
+    {
+        $session = new Session();
+        return $session->addInscription($stagiaire);
     }
 }

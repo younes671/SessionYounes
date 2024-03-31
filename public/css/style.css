@@ -22,9 +22,16 @@ a{
     margin: 10px;
 }
 
+.list{
+    background-color: aqua;
+}
+
 .detail{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    height: 350px;
+    width: 500px;
+    background-color: aqua;
 }

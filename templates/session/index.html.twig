@@ -3,14 +3,21 @@
 {% block title %}Liste session{% endblock %}
 
 {% block body %}
-<h1>Liste session</h1>
+    {% if app.user %}
+        <div class="list">
+        <h1>Liste session</h1>
 
-    <a class="btn btn-success" href="{{ path('new_session') }}">Ajouter une session</a><br>
+            <a class="btn btn-success" href="{{ path('new_session') }}">Ajouter une session</a><br>
 
-        {% for session in sessions %}
-            <a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a> 
-            <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
-            <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Delete</a><br>
-        {% endfor %} 
-
+                {% for session in sessions %}
+                    <a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a> 
+                    <a class="btn btn-warning" href="{{ path('edit_session', {'id': session.id}) }}">Edit</a>
+                    <a class="btn btn-danger" href="{{ path('delete_session', {'id': session.id}) }}">Delete</a><br>
+                {% endfor %} 
+        </div>
+    {% else %}
+        <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
+    {% endif %}
+    
+    
 {% endblock %}

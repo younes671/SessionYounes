@@ -3,12 +3,18 @@
 {% block title %}Détail d'une session{% endblock %}
 
 {% block body %}
-    <h1>Détail d'une session</h1>
-    
- 
-    <h2>{{ session }}</h2>
-    <p>
-        
-    </p>
+        {% if app.user %}
+            <div class="detail">
+                <h1>Fiche session</h1>
+                
+            
+                <h2>{{ session }}</h2>
+                <p>
+                    
+                </p>
+            </div>
+        {% else %}
+            <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
+        {% endif %}
 
 {% endblock %}

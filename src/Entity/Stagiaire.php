@@ -75,7 +75,7 @@ class Stagiaire
         return $this;
     }
 
-    public function getDateNaissance(): ?DateTimeInterface
+    public function getDateNaissance()
     {
         $date = $this->dateNaissance->format('d-m-Y');
         return $date;
