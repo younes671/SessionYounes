@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
+use App\Repository\StagiaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\StagiaireRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: StagiaireRepository::class)]
 class Stagiaire
@@ -75,10 +74,10 @@ class Stagiaire
         return $this;
     }
 
-    public function getDateNaissance()
+    public function getDateNaissance(): ?\DateTimeInterface
     {
-        $date = $this->dateNaissance->format('d-m-Y');
-        return $date;
+        
+        return $this->dateNaissance;
     }
 
     public function setDateNaissance(\DateTimeInterface $dateNaissance): static

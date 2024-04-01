@@ -29,7 +29,7 @@ class StagiaireType extends AbstractType
             ->add('ville', TextType::class)
             // ->add('sessions', EntityType::class, [
             //     'class' => Session::class,
-            //     'choice_label' => 'id',
+            //     'choice_label' => 'titre',
             //     'multiple' => true,
             // ])
             ->add('valider', SubmitType::class)

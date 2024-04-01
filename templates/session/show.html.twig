@@ -8,11 +8,33 @@
                 <h1>Fiche session</h1>
                 
             
-                <h2>{{ session }}</h2>
-                <p>
+            <h2>{{ session.titre }}</h2>
+            <p>
+                <h3>Nombre de place : {{ session.nbPlace }} <br>
+                    Nombre place restante : {{ nbPlaceRestantes }}
+                </h3>
+                <h4>
+                    {# liste inscription session  #}
+                    {% for inscrit in inscriptions %}
+                        <p>{{ inscrit }} <a href="{{ path('deleteStagiaire_session', {'id': session.id, 'inscriptionId': inscrit.id}) }}">Supprimer</a> </p>
+                    {% endfor %}
+                </h4>
+            </p>
+                
+         
+                
+                {# Formulaire pour attribuer une session #}
+                <form action="{{ path('addStagiaire_session', {'id': session.id}) }}" method="post">
+                    <select name="stagiaire">
+                        {% for stagiaire in stagiaires %}
+                            <option value="{{ stagiaire.id }}">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Ajouter</button>
+                </form>
                     
-                </p>
             </div>
+                
         {% else %}
             <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
         {% endif %}
