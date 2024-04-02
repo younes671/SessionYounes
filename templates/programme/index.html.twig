@@ -3,19 +3,7 @@
 {% block title %}Liste session{% endblock %}
 
 {% block body %}
-    {% if app.user %}
-        <div class="list">
-        <h1>Détail programme</h1>
-        {{ form_start(form) }}
-        {{ form_row(form.duree) }}
-        {{ form_row(form.session) }}
-        {{ form_row(form.section) }}
-        {{ form_end(form) }}
-   
-        </div>
-    {% else %}
-        <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
-    {% endif %}
+    
     
     
 {% endblock %}

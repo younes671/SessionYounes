@@ -38,13 +38,16 @@ public function create(Request $request, EntityManagerInterface $entityManager):
         $entityManager->persist($programme);
         $entityManager->flush();
 
+        // renvoie message en cas de succès 
+        $this->addFlash('success', 'Le programme a été ajouté avec succès.');
+
         // Redirection
-        return $this->redirectToRoute('app_programme');
+        return $this->redirectToRoute('addProg_programme');
     }
 
     // Affichage vue
     return $this->render('programme/prog.html.twig', [
-        'form' => $form->createView(),
+        'form' => $form,
     ]);
 }
 

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste stagiaire inscrit{% endblock %}
+
+{% block body %}
+        {% if app.user %}
+            <div class="detail">
+                <h1>Liste stagiaire inscrit</h1>
+            
+            <p>
+                <h4>
+                    {# liste inscription session  #}
+                    {% for inscrit in inscriptions %}
+                        <p>{{ inscrit }} <a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}">Supprimer</a> </p>
+                    {% endfor %}
+                </h4>
+            </p>
+                
+         
+                
+                {# Formulaire pour attribuer une session #}
+                <form class="form-group" action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
+                    <select name="stagiaire">
+                        {% for stagiaire in stagiaires %}
+                            <option value="{{ stagiaire.id }}">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Ajouter</button>
+                </form>
+                    
+            </div>
+                
+        {% else %}
+            <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
+        {% endif %}
+
+{% endblock %}

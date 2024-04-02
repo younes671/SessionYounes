@@ -17,5 +17,11 @@
         <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
     {% endif %}
     
+    {% for flash_message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+    
     
 {% endblock %}

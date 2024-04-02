@@ -18,6 +18,7 @@
                         <th scope="col">Nb places théoriques</th>
                         <th scope="col">Nb places reservées</th>
                         <th scope="col">Nb places restantes</th>
+                        <th scope="col">Liste participant</th>
                         <th scope="col">Détails programme</th>
                       </tr>
                     </thead>
@@ -31,6 +32,7 @@
                           <td>{{ session.nbPlace }}</td>
                           <td>{{ session.nbInscrit }}</td>
                           <td>{{ session.nbPlacesRestantes }}</td> 
+                          <td><a href="{{ path('listInscription_session', {'id': session.id}) }}"><i class="fa-solid fa-users"></i></a></td>
                           <td><a href="{{ path('show_session', {'id': session.id}) }}"><i class="fa-solid fa-book"></i></a></td>
                         </tr>
                         {% endfor %}

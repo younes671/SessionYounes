@@ -8,6 +8,7 @@ use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Form\StagiaireType;
+use App\Repository\ProgrammeRepository;
 use App\Repository\SectionRepository;
 use App\Repository\SessionRepository;
 use App\Repository\StagiaireRepository;
@@ -73,11 +74,21 @@ class SessionController extends AbstractController
 
     // détail session 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session, Stagiaire $stagiaire, StagiaireRepository $stagiaireRepository): Response
+    public function show(Session $session, ProgrammeRepository $programmeRepository, StagiaireRepository $stagiaireRepository): Response
+    {
+        $prog = $programmeRepository->findBy(['session' => $session]);
+        return $this->render('session/show.html.twig', [
+            'sessions' => $session,
+            'progs' => $prog
+        ]);
+    }
+
+    #[Route('/session/{id}/listInscription', name: 'listInscription_session')]
+    public function listInscription(Session $session, StagiaireRepository $stagiaireRepository): Response
     {
         $inscription = $session->getInscriptions();
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
-        return $this->render('session/show.html.twig', [
+        return $this->render('session/listInscription.html.twig', [
             'sessions' => $session,
             'stagiaires' => $stagiaires,
             'inscriptions' => $inscription
