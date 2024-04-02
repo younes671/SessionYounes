@@ -152,4 +152,14 @@ class Session
     {
         return $this->titre;
     }
+
+    public function getNbInscrit()
+    {
+        return count($this->inscriptions);
+    }
+
+    public function getNbPlacesRestantes()
+    {
+        return $this->nbPlace - $this->getNbInscrit();
+    }
 }

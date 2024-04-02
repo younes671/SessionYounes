@@ -2,17 +2,50 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Programme;
+use App\Form\ProgrammeType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProgrammeController extends AbstractController
 {
     #[Route('/programme', name: 'app_programme')]
     public function index(): Response
     {
-        return $this->render('programme/index.html.twig', [
-            'controller_name' => 'ProgrammeController',
-        ]);
+        return $this->render('programme/index.html.twig');
     }
+
+
+
+#[Route('/programme/addProg', name: 'addProg_programme')]
+public function create(Request $request, EntityManagerInterface $entityManager): Response
+{
+    // Création nouvelle instance de Programme
+    $programme = new Programme();
+
+    // Création du formulaire ProgrammeType et le liez à l'entité Programme
+    $form = $this->createForm(ProgrammeType::class, $programme);
+
+    // Gérez les données du formulaire lorsqu'il est soumis
+    $form->handleRequest($request);
+
+    // Vérification soumission et validité formulaire
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Enregistrement base de données
+        $entityManager->persist($programme);
+        $entityManager->flush();
+
+        // Redirection
+        return $this->redirectToRoute('app_programme');
+    }
+
+    // Affichage vue
+    return $this->render('programme/prog.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
 }

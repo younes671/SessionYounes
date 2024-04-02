@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Section;
 use App\Entity\Session;
+use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Form\StagiaireType;
+use App\Repository\SectionRepository;
 use App\Repository\SessionRepository;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,29 +75,20 @@ class SessionController extends AbstractController
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session, Stagiaire $stagiaire, StagiaireRepository $stagiaireRepository): Response
     {
-        // Récupérer le nombre total de stagiaires inscrits à cette session
-        $nbInscriptions = count($session->getInscriptions());
-
-        // Récupérer le nombre total de places disponibles pour cette session
-        $nbPlacesTotal = $session->getNbPlace();
-
-        // Calcul le nombre de places restantes
-        $nbPlacesRestantes = $nbPlacesTotal - $nbInscriptions;
         $inscription = $session->getInscriptions();
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
         return $this->render('session/show.html.twig', [
-            'session' => $session,
+            'sessions' => $session,
             'stagiaires' => $stagiaires,
-            'inscriptions' => $inscription,
-            'nbPlaceRestantes' => $nbPlacesRestantes
+            'inscriptions' => $inscription
         ]);
     }
 
     #[Route('/session/{id}/addStagiaire', name: 'addStagiaire_session')]
-    public function addStagiaire(Request $request, $id, EntityManagerInterface $entityManager)
+    public function addStagiaire(Request $request, $id, StagiaireRepository $stagiaireRepository, SessionRepository $sessionRepository, EntityManagerInterface $entityManager)
     {
         // Récupérer la session en fonction de l'ID passé dans l'URL
-        $session = $entityManager->getRepository(Session::class)->find($id);
+        $session = $sessionRepository->find($id);
 
         // Vérifier si la session existe
         if (!$session) {
@@ -105,7 +99,7 @@ class SessionController extends AbstractController
         $stagiaireId = $request->request->get('stagiaire');
 
         // Récupérer le stagiaire en fonction de l'ID
-        $stagiaire = $entityManager->getRepository(Stagiaire::class)->find($stagiaireId);
+        $stagiaire = $stagiaireRepository->find($stagiaireId);
 
         // Vérifier si le stagiaire existe
         if (!$stagiaire) {
