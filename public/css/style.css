@@ -1,12 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 *{
     font-family: 'Roboto';
+    box-sizing: border-box;
+}
+
+body{
+    background-color: cornflowerblue;
+
+}
+
+h1{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    color: white;
 }
 
 .nav-bar{
     display: flex;
     height: 120px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.267);
+    align-items: center;
 }
 
 .nav{
@@ -16,12 +30,12 @@
 
 .fa-users{
     font-size: 20px;
-    color: grey;
+    color: rgb(255, 255, 255);
 }
 
 .fa-book{
     font-size: 20px;
-    color: grey;
+    color: rgb(255, 255, 255);
 }
 
 .fa-trash{
@@ -31,22 +45,46 @@
 
 .fa-pen-to-square{
     font-size: 12px;
-    color: green;
+    color: rgb(1, 15, 77);
 }
 
-a{
+.lien-nav{
     text-decoration: none;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bolder;
     color: white;
     margin: 10px;
 }
 
-.list{
-    background-color: #0056b3;
+a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    margin: 10px;
 }
 
-.detail{
+
+.th{
+      background-color: #0056b3;  
+}
+
+th{
+    color: white;
+    padding: 10px;
+}
+
+td{
+    color: white;
+    padding: 15px;
+}
+
+.table-bordered{
+    width: 100%;
+    margin: 20px;
+}
+
+/* .detail{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -54,4 +92,4 @@ a{
     height: 350px;
     width: 500px;
     background-color: aqua;
-}
+} */

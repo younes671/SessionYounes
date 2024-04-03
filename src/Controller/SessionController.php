@@ -36,30 +36,37 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function new_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        if(!$session)
+        if($this->getUser())
         {
-            $session = new Session();
-        }
-        
-        $form = $this->createForm(SessionType::class, $session);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
+            if(!$session)
+            {
+                $session = new Session();
+            }
+            
+            $form = $this->createForm(SessionType::class, $session);
+    
+            $form->handleRequest($request);
+    
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $employe = $form->getData();
+                //prepare PDO
+                $entityManager->persist($employe);
+                //execute PDO
+                $entityManager->flush();
+    
+                return $this->redirectToRoute('app_session');
+            }
+            // session/new.html.twig-> on définit l'endroit ou on veut faire passer les données, puis les données qu'on veut faire passer [clé=>valeur]
+            return $this->render('session/new.html.twig', [
+                'formAddSession' => $form,
+                'edit' => $session->getId()
+            ]);
+        }else
         {
-            $employe = $form->getData();
-            //prepare PDO
-            $entityManager->persist($employe);
-            //execute PDO
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_session');
+            return $this->redirectToRoute('app_login');
         }
-        // session/new.html.twig-> on définit l'endroit ou on veut faire passer les données, puis les données qu'on veut faire passer [clé=>valeur]
-        return $this->render('session/new.html.twig', [
-            'formAddSession' => $form,
-            'edit' => $session->getId()
-        ]);
+
     }
 
     // supprime session 
@@ -83,6 +90,7 @@ class SessionController extends AbstractController
         ]);
     }
 
+    // affiche liste des stagiaire inscrit à une session
     #[Route('/session/{id}/listInscription', name: 'listInscription_session')]
     public function listInscription(Session $session, StagiaireRepository $stagiaireRepository): Response
     {

@@ -24,6 +24,7 @@ class RegistrationController extends AbstractController
     {
     }
 
+    // fonction inscription utilisateur 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
@@ -62,9 +63,11 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    // méthode pour vérifier l'email au moment de l'inscription
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
+        
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists

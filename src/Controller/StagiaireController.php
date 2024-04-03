@@ -32,30 +32,37 @@ class StagiaireController extends AbstractController
     #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
     public function new_edit(Stagiaire $stagiaire = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        if(!$stagiaire)
+        if($this->getUser())
         {
-            $stagiaire = new Stagiaire();
-        }
-        
-        $form = $this->createForm(StagiaireType::class, $stagiaire);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
+            if(!$stagiaire)
+            {
+                $stagiaire = new Stagiaire();
+            }
+            
+            $form = $this->createForm(StagiaireType::class, $stagiaire);
+    
+            $form->handleRequest($request);
+    
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $stagiaire = $form->getData();
+                //prepare PDO
+                $entityManager->persist($stagiaire);
+                //execute PDO
+                $entityManager->flush();
+    
+                return $this->redirectToRoute('app_stagiaire');
+            }
+            
+            return $this->render('stagiaire/new.html.twig', [
+                'formAddStagiaire' => $form,
+                'edit' => $stagiaire->getId()
+            ]);
+        }else
         {
-            $stagiaire = $form->getData();
-            //prepare PDO
-            $entityManager->persist($stagiaire);
-            //execute PDO
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_stagiaire');
+            return $this->redirectToRoute('app_login');
         }
-        
-        return $this->render('stagiaire/new.html.twig', [
-            'formAddStagiaire' => $form,
-            'edit' => $stagiaire->getId()
-        ]);
+
     }
     
      // supprime stagiaire 

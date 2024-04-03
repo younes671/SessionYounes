@@ -15,24 +15,49 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class StagiaireType extends AbstractType
 {
+    // formulaire d'ajout stagiaire
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
+            ->add('nom', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
+            ->add('prenom', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-            ])
-            ->add('email', EmailType::class)
-            ->add('adresse', TextType::class)
-            ->add('cp', TextType::class)
-            ->add('ville', TextType::class)
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+                 ])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
+            ->add('adresse', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
+            ->add('cp', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
+            ->add('ville', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
             // ->add('sessions', EntityType::class, [
             //     'class' => Session::class,
             //     'choice_label' => 'titre',
             //     'multiple' => true,
             // ])
-            ->add('valider', SubmitType::class)
+            ->add('valider', SubmitType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
         ;
     }
 

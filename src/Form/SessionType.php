@@ -14,22 +14,35 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SessionType extends AbstractType
 {
+    // formulaire d'ajout session
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nbPlace', NumberType::class)
+            ->add('nbPlace', NumberType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
             // ->add('inscriptions', EntityType::class, [
             //     'class' => Stagiaire::class,
             //     'choice_label' => 'nom',
             //     'multiple' => true,
             // ])
-            ->add('valider', SubmitType::class)
+            ->add('valider', SubmitType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]])
         ;
     }
 

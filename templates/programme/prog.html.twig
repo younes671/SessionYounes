@@ -7,21 +7,21 @@
         <div class="list">
         <h1>Détail programme</h1>
         {{ form_start(form) }}
-        {{ form_row(form.duree) }}
-        {{ form_row(form.session) }}
-        {{ form_row(form.section) }}
+        {{ form_row(form.duree) }}<br>
+        {{ form_row(form.session) }}<br>
+        {{ form_row(form.section) }}<br>
         {{ form_end(form) }}
    
         </div>
+        
+            {% for flash_message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+            {% endfor %}
     {% else %}
         <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
     {% endif %}
-    
-    {% for flash_message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ flash_message }}
-    </div>
-{% endfor %}
     
     
 {% endblock %}

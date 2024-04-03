@@ -19,7 +19,7 @@ class ProgrammeController extends AbstractController
     }
 
 
-
+// méthode creation programme session 
 #[Route('/programme/addProg', name: 'addProg_programme')]
 public function create(Request $request, EntityManagerInterface $entityManager): Response
 {

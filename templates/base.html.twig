@@ -16,16 +16,16 @@
         <div class="nav-bar">
             {% if app.user %}
             <div class="nav">
-                <a href="{{ path('app_logout') }}">Déconnexion</a>
-                <a href="{{ path('app_home') }}">Home</a>
-                <a href="{{ path('app_session') }}">Liste session</a>
-                <a href="{{ path('app_stagiaire') }}">Liste stagiaire</a>
-                <a href="{{ path('addProg_programme') }}">Ajouter programme</a>
+                <a class="lien-nav" href="{{ path('app_logout') }}">Déconnexion</a>
+                <a class="lien-nav" href="{{ path('app_home') }}">Home</a>
+                <a class="lien-nav" href="{{ path('app_session') }}">Liste session</a>
+                <a class="lien-nav" href="{{ path('app_stagiaire') }}">Liste stagiaire</a>
+                <a class="lien-nav" href="{{ path('addProg_programme') }}">Ajouter programme</a>
             </div>
             {% else %}
             <div class="connection">
-                <a href="{{ path('app_register') }}">S'inscrire</a>
-                <a href="{{ path('app_login') }}">Se connecter</a>
+                <a class="lien-nav" href="{{ path('app_register') }}">S'inscrire</a>
+                <a class="lien-nav" href="{{ path('app_login') }}">Se connecter</a>
             </div>
             {% endif %}
         </div>
