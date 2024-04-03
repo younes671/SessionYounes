@@ -6,7 +6,7 @@
 
 body{
     background-color: cornflowerblue;
-
+    height: 100vh;
 }
 
 h1{
@@ -56,6 +56,14 @@ h1{
     margin: 10px;
 }
 
+.lien-nav:hover{
+    color: rgb(178, 246, 248);
+}
+
+li{
+    color: white;
+}
+
 a{
     text-decoration: none;
     font-size: 20px;
@@ -79,10 +87,41 @@ td{
     padding: 15px;
 }
 
+.btn{
+    display: inline-block;
+
+}
+
 .table-bordered{
     width: 100%;
     margin: 20px;
 }
+
+.list{
+    display: flex;
+    justify-content: center;
+}
+
+.addProgramme{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+h4{
+    height: 50px;
+}
+
+label{
+    color: white;
+}
+
+.option{
+    width: 20%;
+    border-radius: 5px;
+    height: 30px;
+}
+
 
 /* .detail{
     display: flex;

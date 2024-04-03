@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireType;
+use App\Repository\SessionRepository;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +27,7 @@ class StagiaireController extends AbstractController
             'stagiaires' => $stagiaire
         ]);
     }
+
     
     // crée le formulaire et rajoute session dans bdd 
     #[Route('stagiaire/new', name: 'new_stagiaire')]
@@ -75,12 +77,12 @@ class StagiaireController extends AbstractController
          return $this->redirectToRoute('app_stagiaire');
      }
  
-     // détail stagiaire 
+     // détail stagiaire +  récupère  sessions 
      #[Route('/stagiaire/{id}', name: 'show_stagiaire')]
-     public function show(Stagiaire $stagiaire): Response
+     public function show(Stagiaire $stagiaire, SessionRepository $sessionRepository, StagiaireRepository $stagiaireRepository): Response
      {
          return $this->render('stagiaire/show.html.twig', [
-             'stagiaire' => $stagiaire
+             'stagiaire' => $stagiaire,
          ]);
      }
 }

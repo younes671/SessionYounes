@@ -4,20 +4,50 @@
 
 {% block body %}
         {% if app.user %}
-            <div class="detail">
-                <h1>Fiche stagiaire</h1>
-
-                <h2>{{ stagiaire }}</h2>
-                <p class="stagiaire">
-                    {{ stagiaire.dateNaissance|date('d-m-Y') }}<br>
-                    {{ stagiaire.email }}<br>
-                    {{ stagiaire.adresse }}<br>
-                    {{ stagiaire.cp ~ ' ' ~ stagiaire.ville }}
-                </p>
+        <h1>Fiche stagiaire</h1>
+        
+        <div class="list">
+                <table class="table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="th" scope="col">Nom</th>
+                        <th class="th" scope="col">Date de naissance</th>
+                        <th class="th" scope="col">Courriel</th>
+                        <th class="th" scope="col">Adresse</th>
+                        <th class="th" scope="col">Code postale</th>
+                        <th class="th" scope="col">Ville</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                
+                        <tr>
+                          <td>{{ stagiaire }}</td>
+                          <td>{{ stagiaire.dateNaissance|date('d-m-Y') }}</td>
+                          <td>{{ stagiaire.email }}</td>
+                          <td>{{ stagiaire.adresse }}</td>
+                          <td>{{ stagiaire.cp }}</td> 
+                          <td>{{ stagiaire.ville }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         {% else %}
             <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
-{% endif %}
+    {% endif %}
+        {% if stagiaire.sessions|length == 0 %}
+            
+        {% else %}
+            <h1>Sessions prévues</h1>
+            {% for session in stagiaire.sessions %}
+                <ul>
+                    <li>
+                        <p class="titre"><h5>{{ session.titre ~ ' ( du ' ~ session.dateDebut|date('d-m-Y') ~ ' au ' ~ session.dateFin|date('d-m-Y') ~ ' ) ' }} </p>
+                    </li>
+                </ul>
+            {% endfor %}
+            
+        {% endif %}
+
 
     
 

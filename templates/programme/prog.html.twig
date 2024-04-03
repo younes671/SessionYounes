@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste session{% endblock %}
+{% block title %}Ajouter programme{% endblock %}
 
 {% block body %}
     {% if app.user %}
-        <div class="list">
-        <h1>Détail programme</h1>
+        <div class="addProgramme">
+        <h1>Ajouter un programme</h1>
         {{ form_start(form) }}
         {{ form_row(form.duree) }}<br>
         {{ form_row(form.session) }}<br>

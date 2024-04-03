@@ -79,7 +79,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-    // détail session 
+    // détail programme de session
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session, ProgrammeRepository $programmeRepository, StagiaireRepository $stagiaireRepository): Response
     {
@@ -94,6 +94,7 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/listInscription', name: 'listInscription_session')]
     public function listInscription(Session $session, StagiaireRepository $stagiaireRepository): Response
     {
+        
         $inscription = $session->getInscriptions();
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
         return $this->render('session/listInscription.html.twig', [
@@ -132,7 +133,7 @@ class SessionController extends AbstractController
         $entityManager->flush();
 
         // Rediriger vers une page de confirmation ou autre
-        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        return $this->redirectToRoute('listInscription_session', ['id' => $session->getId()]);
         // return $this->redirectToRoute('addStagiaire_session', ['id' => $session->getId()]);
     }
 
@@ -142,7 +143,7 @@ class SessionController extends AbstractController
         $session->removeInscription($inscriptionId);
         $entityManager->flush();
 
-        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        return $this->redirectToRoute('listInscription_session', ['id' => $session->getId()]);
     }
 
 }
