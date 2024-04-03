@@ -11,7 +11,7 @@
                 {% if inscriptions | length == 0 %}
                     <p>Pas d'inscrits</p>
                 {% else %}
-                    {% for inscrit in inscriptions %}
+                    {% for inscrit in sessions.inscriptions %}
                     <a  href="{{ path('show_stagiaire', {'id': inscrit.id}) }}">{{ inscrit }}</a> 
                     <a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}"><i class="fa-solid fa-trash"></i></a>
                     {% endfor %}

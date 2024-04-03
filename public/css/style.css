@@ -95,6 +95,7 @@ td{
 .table-bordered{
     width: 100%;
     margin: 20px;
+    border-color: black;
 }
 
 .list{
