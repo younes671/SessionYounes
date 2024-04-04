@@ -5,7 +5,8 @@
 {% block body %}
         {% if app.user %}
         <h1>Fiche stagiaire</h1>
-        
+
+        {# affichage détail stagiaire  #}
         <div class="list">
                 <table class="table-bordered">
                     <thead>
@@ -34,10 +35,14 @@
         {% else %}
             <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
     {% endif %}
+
+        {# vérifie si tableau vide  #}
         {% if stagiaire.sessions|length == 0 %}
-            
+        <h1>Sessions prévues</h1>
+            <h3>Aucune session prévue</h3>
         {% else %}
             <h1>Sessions prévues</h1>
+            {# affiche session stagiaire prévue  #}
             {% for session in stagiaire.sessions %}
                 <ul>
                     <li>

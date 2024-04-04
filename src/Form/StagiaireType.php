@@ -21,33 +21,33 @@ class StagiaireType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('prenom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]
                  ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('adresse', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('cp', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('ville', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             // ->add('sessions', EntityType::class, [
             //     'class' => Session::class,
@@ -56,7 +56,7 @@ class StagiaireType extends AbstractType
             // ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control btn btn-primary'
                 ]])
         ;
     }

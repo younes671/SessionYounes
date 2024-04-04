@@ -20,25 +20,25 @@ class ProgrammeType extends AbstractType
         $builder
             ->add('duree', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('session', EntityType::class, [
                 'class' => Session::class,
                 'choice_label' => 'titre', 
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]
             ])
             ->add('section', EntityType::class, [
                 'class' => Section::class,
                 'choice_label' => 'nomSection',  
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]
             ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control btn btn-primary'
                 ]])
         ;
     }

@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\Session;
 use App\Entity\Stagiaire;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SessionType extends AbstractType
 {
@@ -18,20 +19,24 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('titre', TextType::class, [
+            'attr' => [
+                'class' => 'edit'
+            ]])
             ->add('nbPlace', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]
             ])
             // ->add('inscriptions', EntityType::class, [
@@ -41,7 +46,7 @@ class SessionType extends AbstractType
             // ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control btn btn-primary'
                 ]])
         ;
     }

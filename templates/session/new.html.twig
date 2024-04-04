@@ -3,17 +3,21 @@
 {% block title %}Ajouter Session{% endblock %}
 
 {% block body %}
+<div class="login">
     {% if edit %}
     <h1>Editer une session</h1> 
     {% else %}
     <h1>Ajouter une session</h1>
     {% endif %}
 
-    
+        {# formulaire ajout et edit session  #}
         {{ form_start(formAddSession) }}
+        {{ form_row(formAddSession.titre) }}
         {{ form_row(formAddSession.nbPlace) }}
         {{ form_row(formAddSession.dateDebut) }}
         {{ form_row(formAddSession.dateFin) }}
         {{ form_end(formAddSession) }}
+</div>
+
     
 {% endblock %}

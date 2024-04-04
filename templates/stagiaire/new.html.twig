@@ -3,12 +3,14 @@
 {% block title %}Ajouter Stagiaire{% endblock %}
 
 {% block body %}
+<div class="login">
     {% if edit %}
     <h1>Editer un stagiaire</h1> 
     {% else %}
     <h1>Ajouter un stagiaire</h1>
     {% endif %}
 
+        {# formulaire ajout et edit stagiaire #}
         {{ form_start(formAddStagiaire) }}
         {{ form_row(formAddStagiaire.nom) }}
         {{ form_row(formAddStagiaire.prenom) }}
@@ -18,5 +20,7 @@
         {{ form_row(formAddStagiaire.cp) }}
         {{ form_row(formAddStagiaire.ville) }}
         {{ form_end(formAddStagiaire) }}
+</div>
+
 
 {% endblock %}

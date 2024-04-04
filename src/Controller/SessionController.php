@@ -81,9 +81,8 @@ class SessionController extends AbstractController
 
     // détail programme de session
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session, ProgrammeRepository $programmeRepository, StagiaireRepository $stagiaireRepository): Response
+    public function show(Session $session): Response
     {
-        
         return $this->render('session/show.html.twig', [
             'sessions' => $session,
         ]);
@@ -91,15 +90,17 @@ class SessionController extends AbstractController
 
     // affiche liste des stagiaire inscrit à une session
     #[Route('/session/{id}/listInscription', name: 'listInscription_session')]
-    public function listInscription(Session $session, StagiaireRepository $stagiaireRepository): Response
+    public function listInscription(Session $session = null, StagiaireRepository $stagiaireRepository, SessionRepository $sr): Response
     {
         
         $inscription = $session->getInscriptions();
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
+        $nonInscrits = $sr->findNonInscrits($session->getId());
         return $this->render('session/listInscription.html.twig', [
             'sessions' => $session,
             'stagiaires' => $stagiaires,
-            'inscriptions' => $inscription
+            'inscriptions' => $inscription,
+            'nonInscrits' => $nonInscrits
         ]);
     }
 

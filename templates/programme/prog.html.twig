@@ -3,9 +3,10 @@
 {% block title %}Ajouter programme{% endblock %}
 
 {% block body %}
+<div class="login">
     {% if app.user %}
-        <div class="addProgramme">
         <h1>Ajouter un programme</h1>
+        {# formulaire ajout programme  #}
         {{ form_start(form) }}
         {{ form_row(form.duree) }}<br>
         {{ form_row(form.session) }}<br>
@@ -13,7 +14,7 @@
         {{ form_end(form) }}
    
         </div>
-        
+        {# message flash succès ajout  #}
             {% for flash_message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ flash_message }}

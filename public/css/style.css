@@ -88,7 +88,9 @@ td{
 }
 
 .btn{
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -97,6 +99,33 @@ td{
     margin: 20px;
     border-color: black;
 }
+
+.login{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-control{
+    /* display: flex; */
+    /* justify-content: center; */
+    width: 60%;
+    margin: 15px;
+
+}
+
+.edit{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 5px;
+    height: 35px;
+    border: none;
+    padding: 5px;
+    margin: 5px;
+}
+
 
 .list{
     display: flex;
@@ -115,6 +144,7 @@ h4{
 
 label{
     color: white;
+    /* margin-left: 15px; */
 }
 
 .option{

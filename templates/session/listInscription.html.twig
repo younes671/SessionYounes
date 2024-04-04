@@ -4,7 +4,7 @@
 
 {% block body %}
         {% if app.user %}
-            <div class="detail">
+            <div class="login">
                 <h1>Liste stagiaire inscrit</h1>
                 
                 {# liste inscription session  #}
@@ -12,23 +12,42 @@
                     <p>Pas d'inscrits</p>
                 {% else %}
                     {% for inscrit in sessions.inscriptions %}
-                    <a  href="{{ path('show_stagiaire', {'id': inscrit.id}) }}">{{ inscrit }}</a> 
-                    <a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                    <div>
+                        <a  href="{{ path('show_stagiaire', {'id': inscrit.id}) }}">{{ inscrit }}</a> 
+                        <a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+
                     {% endfor %}
                 {% endif %}
                
-                <div class="list-deroulante">
+                <div class="login">
                     {# Formulaire pour attribuer une session #}
                     <form action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
                         <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
-                        <select class="option" name="stagiaire">
-                            {% for stagiaire in stagiaires %}
-                                <option  value="{{ stagiaire.id }}">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</option>
+                        <select class="edit" name="stagiaire">
+                            {% for nonInscrit in nonInscrits %}
+                                <option class="edit"  value="{{ nonInscrit.id }}">{{ nonInscrit.nom ~ ' ' ~ nonInscrit.prenom }}</option>
                             {% endfor %}
                         </select>
-                        <button class="btn btn-primary" type="submit">Ajouter</button>
+                        <button class="btn btn-primary form-control" type="submit">Ajouter</button>
                     </form>
                 </div>
+
+                <h1>Liste stagiaire non-inscrit</h1>
+
+
+                  {# liste stagiaire non inscrit  #}
+                  {% if nonInscrits | length == 0 %}
+                  <p>Tous les stagiaires sont inscrit à au moins une session</p>
+              {% else %}
+                  {% for nonInscrit in nonInscrits %}
+                  <div class="">
+                      <a  href="{{ path('show_stagiaire', {'id': nonInscrit.id}) }}">{{ nonInscrit }}</a> 
+                      <a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': nonInscrit.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                  </div>
+
+                  {% endfor %}
+              {% endif %}
 
                     
             </div>
