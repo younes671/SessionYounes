@@ -24,11 +24,11 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('pseudo', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'edit'
                 ]])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -45,7 +45,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'form-control']],
+                'options' => ['attr' => ['class' => 'edit']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
@@ -64,7 +64,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control btn btn-primary'
+                    'class' => 'edit btn btn-primary'
                 ]])
         ;
     }

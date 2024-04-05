@@ -38,7 +38,7 @@ class ProgrammeType extends AbstractType
             ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control btn btn-primary'
+                    'class' => 'edit btn btn-primary'
                 ]])
         ;
     }

@@ -4,14 +4,91 @@
 
 {% block body %}
         {% if app.user %}
-            <div class="list">
-                <h1>Programme session</h1>
-                {# affiche programme session  #}
+<div class="container">
+    <div class="section1">
+        <span class="login">
+            <h1>Liste stagiaire inscrit</h1>
+        </span>
+        <span class="list">
+            <span class="login">
+                {# liste inscription session  #}
+                {% if inscriptions | length == 0 %}
+                    <p>Pas d'inscrits</p>
+                {% else %}
+                    <span>
+                        <table class="table-bordered">
+                            <thead>
+                                <tr>
+                                <th class="th" scope="col">Stagiaire</th>
+                                <th class="th" scope="col">Supprimer</th>
+                                </tr>
+                            </thead>
+                            <tbody>    
+                                {% for inscrit in sessions.inscriptions %}
+                                  <tr>
+                                    <td><a href="{{ path('show_stagiaire', {'id': inscrit.id}) }}">{{ inscrit }}</a> </td>
+                                    <td><a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
+                                  </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </span>
+                {% endif %}
+            </span>
+        
+            <span class="login">
+                {# Formulaire inscription session #}
+                <form action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
+                    <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
+                    <select class="edit" name="stagiaire">
+                        {% for nonInscrit in nonInscrits %}
+                            <option class="edit"  value="{{ nonInscrit.id }}">{{ nonInscrit.nom ~ ' ' ~ nonInscrit.prenom }}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-primary edit" type="submit">Ajouter</button>
+                </form>
+            </span>
+        </div>
+    <div class="section2">
+            <span class="login">
+                <h1>Liste stagiaire non-inscrit</h1>
+                {# liste stagiaire non inscrit  #}
+                {% if nonInscrits | length == 0 %}
+                <h4>Tous les stagiaires sont inscrit à au moins une session</h4>
+            {% else %}
+                <table class="table-bordered">
+                    <thead>
+                        <tr>
+                        <th class="th" scope="col">Stagiaire</th>
+                        <th class="th" scope="col">Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
+                {% for nonInscrit in nonInscrits %}
+                    <span>
+                        <tr>
+                            <td><a  href="{{ path('show_stagiaire', {'id': nonInscrit.id}) }}">{{ nonInscrit.nom ~ ' ' ~ nonInscrit.prenom }}</a></td>
+                            <td><a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': nonInscrit.id}) }}"><i class="fa-solid fa-trash"></i></a></a></td>
+                        </tr>
+                    </span>
+                {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            </span>                   
+        </span>
+    </div>       
+    <div class="section3">
+        {# affiche programme session  #}
+        <span class="login">
+            <h1>Programme session</h1>
+            <span class="list">
                 <table class="table-bordered">
                     <thead>
                         <tr>
                         <th class="th" scope="col">Module</th>
                         <th class="th" scope="col">Durée en jour</th>
+                        <th class="th" scope="col">Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>    
@@ -19,11 +96,37 @@
                         <tr>
                             <td> {{ prog.section.nomSection }} </td>
                             <td>{{ prog.duree }}</td>
-                          </tr>
+                            <td><a href="{{ path('deleteProgramme_session', {'id': sessions.id, 'programmeId': prog.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
+            </span>
+        </span>
+    </div>
+    <div class="section4">
+        {# ajoute programme #}
+        <span class="login">
+            {% if app.user %}
+                <h1>Ajouter un programme</h1>
+                {# formulaire ajout programme  #}
+                {{ form_start(formAddProgramme) }}
+                {{ form_row(formAddProgramme.duree) }}<br>
+                {{ form_row(formAddProgramme.session) }}<br>
+                {{ form_row(formAddProgramme.section) }}<br>
+                {{ form_end(formAddProgramme) }}
+        </span>
+        {# message flash succès ajout  #}
+            {% for flash_message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </span>
+    </div>
+</div>
+                        {% endfor %}
+                {% else %}
+                    <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
+                {% endif %}
                 
         {% else %}
             <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">

@@ -4,9 +4,12 @@
 
 {% block body %}
     {% if app.user %}
-            <h1>Liste des stagiaires</h1>
-                
-            <a class="btn btn-primary" href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a><br>
+    <div class="login">
+      <h1>Liste des stagiaires</h1>
+          
+      <a class="btn btn-primary" href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a><br>
+    </div>
+
 
             {# affichage liste et gestion stagiaire  #}
             <div class="list">

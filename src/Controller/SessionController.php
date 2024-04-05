@@ -7,10 +7,11 @@ use App\Entity\Session;
 use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
+use App\Form\ProgrammeType;
 use App\Form\StagiaireType;
-use App\Repository\ProgrammeRepository;
 use App\Repository\SectionRepository;
 use App\Repository\SessionRepository;
+use App\Repository\ProgrammeRepository;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,10 +82,40 @@ class SessionController extends AbstractController
 
     // détail programme de session
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session): Response
+    #[Route('/session/{id}/addProg', name: 'addProg_programme')]
+    public function show(Session $session, StagiaireRepository $stagiaireRepository, SessionRepository $sr, Request $request, EntityManagerInterface $entityManager): Response
     {
+         // Création nouvelle instance de Programme
+        $programme = new Programme();
+
+        // Création du formulaire ProgrammeType et le liez à l'entité Programme
+        $form = $this->createForm(ProgrammeType::class, $programme);
+
+        // Gérez les données du formulaire lorsqu'il est soumis
+        $form->handleRequest($request);
+
+        // Vérification soumission et validité formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Enregistrement base de données
+            $entityManager->persist($programme);
+            $entityManager->flush();
+
+            // renvoie message en cas de succès 
+            // $this->addFlash('success', 'Le programme a été ajouté avec succès.');
+
+            // Redirection
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        }
+
+        $inscription = $session->getInscriptions();
+        $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
+        $nonInscrits = $sr->findNonInscrits($session->getId());
         return $this->render('session/show.html.twig', [
             'sessions' => $session,
+            'stagiaires' => $stagiaires,
+            'inscriptions' => $inscription,
+            'nonInscrits' => $nonInscrits,
+            'formAddProgramme' => $form
         ]);
     }
 
@@ -133,7 +164,7 @@ class SessionController extends AbstractController
         $entityManager->flush();
 
         // Rediriger vers une page de confirmation ou autre
-        return $this->redirectToRoute('listInscription_session', ['id' => $session->getId()]);
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
         // return $this->redirectToRoute('addStagiaire_session', ['id' => $session->getId()]);
     }
 
@@ -143,8 +174,19 @@ class SessionController extends AbstractController
         $session->removeInscription($inscriptionId);
         $entityManager->flush();
 
-        return $this->redirectToRoute('listInscription_session', ['id' => $session->getId()]);
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
+
+    #[Route('/session/{id}/deleteProgramme/{programmeId}', name: 'deleteProgramme_session')]
+    public function deleteProgramme(Session $session, Programme $programme, EntityManagerInterface $entityManager): Response
+    {
+        $session->removeProgramme($programme);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    }
+
+
 
 }
 

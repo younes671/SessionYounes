@@ -10,13 +10,16 @@
     <h1>Ajouter une session</h1>
     {% endif %}
 
-        {# formulaire ajout et edit session  #}
-        {{ form_start(formAddSession) }}
-        {{ form_row(formAddSession.titre) }}
-        {{ form_row(formAddSession.nbPlace) }}
-        {{ form_row(formAddSession.dateDebut) }}
-        {{ form_row(formAddSession.dateFin) }}
-        {{ form_end(formAddSession) }}
+<div class="list-form">
+
+    {# formulaire ajout et edit session  #}
+    {{ form_start(formAddSession) }}
+    {{ form_row(formAddSession.titre) }}
+    {{ form_row(formAddSession.nbPlace) }}
+    {{ form_row(formAddSession.dateDebut) }}
+    {{ form_row(formAddSession.dateFin) }}
+    {{ form_end(formAddSession) }}
+</div>
 </div>
 
     
