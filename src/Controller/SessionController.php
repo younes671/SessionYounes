@@ -178,9 +178,10 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}/deleteProgramme/{programmeId}', name: 'deleteProgramme_session')]
-    public function deleteProgramme(Session $session, Programme $programme, EntityManagerInterface $entityManager): Response
+    public function deleteProgrammeSession(Session $session, Programme  $programmeId, EntityManagerInterface $entityManager): Response
     {
-        $session->removeProgramme($programme);
+        
+        $entityManager->remove($programmeId);
         $entityManager->flush();
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
