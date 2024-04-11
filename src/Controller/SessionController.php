@@ -80,7 +80,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-    // détail programme de session
+    // détail programme d'une session + ajout programme
     #[Route('/session/{id}', name: 'show_session')]
     #[Route('/session/{id}/addProg', name: 'addProg_programme')]
     public function show(Session $session, StagiaireRepository $stagiaireRepository, SessionRepository $sr, Request $request, EntityManagerInterface $entityManager): Response
@@ -110,16 +110,18 @@ class SessionController extends AbstractController
         $inscription = $session->getInscriptions();
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
         $nonInscrits = $sr->findNonInscrits($session->getId());
+        $findProgsNoSession = $sr->findProgsNoSession($session->getId());
         return $this->render('session/show.html.twig', [
             'sessions' => $session,
             'stagiaires' => $stagiaires,
             'inscriptions' => $inscription,
             'nonInscrits' => $nonInscrits,
-            'formAddProgramme' => $form
+            'formAddProgramme' => $form,
+            'findProgsNoSession' => $findProgsNoSession
         ]);
     }
 
-    // affiche liste des stagiaire inscrit à une session
+    // affiche liste des stagiaires inscrit à une session
     #[Route('/session/{id}/listInscription', name: 'listInscription_session')]
     public function listInscription(Session $session = null, StagiaireRepository $stagiaireRepository, SessionRepository $sr): Response
     {
@@ -135,6 +137,7 @@ class SessionController extends AbstractController
         ]);
     }
 
+    // ajoute stagiaire à une session 
     #[Route('/session/{id}/addStagiaire', name: 'addStagiaire_session')]
     public function addStagiaire(Request $request, $id, StagiaireRepository $stagiaireRepository, SessionRepository $sessionRepository, EntityManagerInterface $entityManager)
     {
@@ -168,6 +171,7 @@ class SessionController extends AbstractController
         // return $this->redirectToRoute('addStagiaire_session', ['id' => $session->getId()]);
     }
 
+    // supprime stagiaire inscrit à une session 
     #[Route('/session/{id}/deleteStagiaire/{inscriptionId}', name: 'deleteStagiaire_session')]
     public function deleteStagiaireSession(Session $session, Stagiaire $inscriptionId, EntityManagerInterface $entityManager): Response
     {
@@ -177,6 +181,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
 
+    // supprime programme d'une session 
     #[Route('/session/{id}/deleteProgramme/{programmeId}', name: 'deleteProgramme_session')]
     public function deleteProgrammeSession(Session $session, Programme  $programmeId, EntityManagerInterface $entityManager): Response
     {

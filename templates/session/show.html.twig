@@ -42,7 +42,7 @@
                     <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
                     <select class="edit" name="stagiaire">
                         {% for nonInscrit in nonInscrits %}
-                            <option class="edit"  value="{{ nonInscrit.id }}">{{ nonInscrit.nom ~ ' ' ~ nonInscrit.prenom }}</option>
+                            <option class="edit"  value="{{ nonInscrit.nom }}">{{ nonInscrit.prenom }}</option>
                         {% endfor %}
                     </select>
                     <button class="btn btn-primary edit" type="submit">Ajouter</button>
@@ -112,10 +112,17 @@
                 {# formulaire ajout programme  #}
                 {{ form_start(formAddProgramme) }}
                 {{ form_row(formAddProgramme.duree) }}<br>
-                {{ form_row(formAddProgramme.session) }}<br>
+                {# {{ form_row(formAddProgramme.session) }}<br> #}
                 {{ form_row(formAddProgramme.section) }}<br>
                 {{ form_end(formAddProgramme) }}
         </span>
+        <form action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
+            <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
+            <select class="edit" name="stagiaire">
+                {% for findProgNoSession in findProgsNoSession %}
+                    <option class="edit"  value="{{ findProgNoSession.id }}">{{ findProgNoSession.nomSection }}</option>
+                {% endfor %}
+            </select>
         {# message flash succès ajout  #}
             {% for flash_message in app.flashes('success') %}
             <div class="alert alert-success">
@@ -123,7 +130,7 @@
             </span>
     </div>
 </div>
-                        {% endfor %}
+            {% endfor %}
                 {% else %}
                     <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
                 {% endif %}

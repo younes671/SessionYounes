@@ -50,6 +50,35 @@ class SessionRepository extends ServiceEntityRepository
         
     }
 
+    public function findProgsNoSession($session_id)
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+        // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+        $qb->select('p')
+            ->from('App\Entity\Programme', 'p')
+            ->innerJoin('p.session', 'ps')
+            ->where('ps.id = :id');
+
+        $sub = $em->createQueryBuilder();
+        //sélectionner tous les stagiaires qui ne sont pas ( NOT IN ) dans le résultat précédent
+        //on obtient donc les stagiaires non inscrits pour une session définie
+        $sub->select('s')
+            ->from('App\Entity\Section', 's')
+            ->where($sub->expr()->notIn('s.id', $qb->getDQL()))
+            //requête paramétrée
+            ->setParameter('id', $session_id)
+            //trier la liste des stagiaires sur le nom de famille
+            ->orderBy('s.nomSection');
+
+        //renvoyer le résultat
+        $query = $sub->getQuery();
+        return $query->getResult();
+        
+    }
+
 
     
     
