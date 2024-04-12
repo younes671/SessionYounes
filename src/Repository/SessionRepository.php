@@ -50,34 +50,51 @@ class SessionRepository extends ServiceEntityRepository
         
     }
 
-    public function findProgsNoSession($session_id)
-    {
-        $em = $this->getEntityManager();
-        $sub = $em->createQueryBuilder();
+    // public function findProgsNoSession($session_id)
+    // {
+    //     $em = $this->getEntityManager();
+    //     $sub = $em->createQueryBuilder();
 
-        $qb = $sub;
-        // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
-        $qb->select('p')
-            ->from('App\Entity\Programme', 'p')
-            ->innerJoin('p.session', 'ps')
-            ->where('ps.id = :id');
+    //     $qb = $sub;
+    //     // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+    //     $qb->select('p')
+    //         ->from('App\Entity\Programme', 'p')
+    //         ->innerJoin('p.session', 'ps')
+    //         ->where('ps.id = :id');
 
-        $sub = $em->createQueryBuilder();
-        //sélectionner tous les stagiaires qui ne sont pas ( NOT IN ) dans le résultat précédent
-        //on obtient donc les stagiaires non inscrits pour une session définie
-        $sub->select('s')
-            ->from('App\Entity\Section', 's')
-            ->where($sub->expr()->notIn('s.id', $qb->getDQL()))
-            //requête paramétrée
-            ->setParameter('id', $session_id)
-            //trier la liste des stagiaires sur le nom de famille
-            ->orderBy('s.nomSection');
+    //     $sub = $em->createQueryBuilder();
+    //     //sélectionner tous les stagiaires qui ne sont pas ( NOT IN ) dans le résultat précédent
+    //     //on obtient donc les stagiaires non inscrits pour une session définie
+    //     $sub->select('s')
+    //         ->from('App\Entity\Section', 's')
+    //         ->where($sub->expr()->notIn('s.id', $qb->getDQL()))
+    //         //requête paramétrée
+    //         ->setParameter('id', $session_id)
+    //         //trier la liste des stagiaires sur le nom de famille
+    //         ->orderBy('s.nomSection');
 
-        //renvoyer le résultat
-        $query = $sub->getQuery();
-        return $query->getResult();
+    //     //renvoyer le résultat
+    //     $query = $sub->getQuery();
+    //     return $query->getResult();
         
-    }
+    // }
+
+    public function findProgsNoSession($session_id)
+{
+    $em = $this->getEntityManager();
+
+    // Sélectionner tous les modules qui ne sont pas liés à la session spécifiée
+    $qb = $em->createQueryBuilder();
+    $qb->select('p')
+        ->from('App\Entity\Programme', 'p')
+        ->leftJoin('p.session', 'ps')
+        ->where('ps.id IS NULL OR ps.id != :session_id')
+        ->setParameter('session_id', $session_id);
+
+    // Renvoyer les modules non attribués à la session spécifiée
+    $query = $qb->getQuery();
+    return $query->getResult();
+}
 
 
     

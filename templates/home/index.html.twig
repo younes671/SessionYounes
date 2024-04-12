@@ -4,7 +4,7 @@
 
 {% block body %}
     {% if app.user %}
-        <h1>Hello {{ app.user.pseudo }}</h1>
+        <h1>Salut {{ app.user.pseudo }}</h1>
         {% else %}
         <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
     {% endif %}

@@ -111,12 +111,14 @@ class SessionController extends AbstractController
         $stagiaires = $stagiaireRepository->findBy([], ["nom" => "ASC"]);
         $nonInscrits = $sr->findNonInscrits($session->getId());
         $findProgsNoSession = $sr->findProgsNoSession($session->getId());
+        $sessions = $sr->findBy(['id' => $session], ["id" => "ASC"]);
         return $this->render('session/show.html.twig', [
             'sessions' => $session,
             'stagiaires' => $stagiaires,
             'inscriptions' => $inscription,
             'nonInscrits' => $nonInscrits,
             'formAddProgramme' => $form,
+            'placeSessions' => $sessions,
             'findProgsNoSession' => $findProgsNoSession
         ]);
     }
