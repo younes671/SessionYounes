@@ -22,15 +22,14 @@ class ProgrammeType extends AbstractType
                 'attr' => [
                     'class' => 'edit'
                 ]])
-            ->add('session', EntityType::class, [
-                'class' => Session::class,
-                // 'choice_label' => 'titre', 
+            ->add('session', NumberType::class, [
                 'attr' => [
                     'class' => 'edit'
                 ]
             ])
             ->add('section', EntityType::class, [
                 'class' => Section::class,
+                'choices' => $options['sections'],
                 'choice_label' => 'nomSection',  
                 'attr' => [
                     'class' => 'edit'
@@ -47,6 +46,7 @@ class ProgrammeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Programme::class,
+            'sections' => null,
         ]);
     }
 }

@@ -113,13 +113,7 @@
                 {{ form_row(formAddProgramme.section) }}<br>
                 {{ form_end(formAddProgramme) }}
         </span>
-        <form action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
-            <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
-            <select class="edit" name="stagiaire">
-                {% for findProgNoSession in findProgsNoSession %}
-                    <option class="edit"  value="{{ findProgNoSession.id }}">{{ findProgNoSession.section.nomSection }}</option>
-                {% endfor %}
-            </select>
+
         {# message flash succès ajout  #}
             {% for flash_message in app.flashes('success') %}
             <div class="alert alert-success">

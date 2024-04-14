@@ -87,9 +87,11 @@ class SessionController extends AbstractController
     {
          // Création nouvelle instance de Programme
         $programme = new Programme();
-
+        $sections = $sr->findProgsNoSession($session->getId());
         // Création du formulaire ProgrammeType et le liez à l'entité Programme
-        $form = $this->createForm(ProgrammeType::class, $programme);
+        $form = $this->createForm(ProgrammeType::class, $programme, [
+            'sections' => $sections
+        ]);
 
         // Gérez les données du formulaire lorsqu'il est soumis
         $form->handleRequest($request);
@@ -182,6 +184,9 @@ class SessionController extends AbstractController
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
+
+    
+    
 
     // supprime programme d'une session 
     #[Route('/session/{id}/deleteProgramme/{programmeId}', name: 'deleteProgramme_session')]
