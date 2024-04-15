@@ -7,7 +7,20 @@
 <div class="">
     <div class="section1">
         <span class="login">
-            <h1>Liste stagiaire inscrit</h1>
+            <h1> {{ sessions.titre ~ ' ( du ' ~ sessions.dateDebut|date('d-m-Y') ~ ' au ' ~ sessions.dateFin|date('d-m-Y') ~ ' ) ' }} </h1>
+            {% for placeSession in placeSessions %}
+            <div class="">
+                <div class="card-body">
+                    <h5 class="detail-place">Nb places : {{ placeSession.nbPlace }}</h5>
+                    <h5 class="detail-place">Nb places reservées : {{ placeSession.nbInscrit }}</h5>
+                    <h5 class="detail-place">Nb places restantes : {{ placeSession.nbPlacesRestantes }}</h5>
+                    
+                </div>
+            </div>
+        {% endfor %}
+        </span>
+        <span class="login">
+            <h2>Liste stagiaire inscrit</h2>
         </span>
         <span class="list">
             <span class="login">
@@ -52,7 +65,7 @@
     <div class="section2">
         {# affiche programme session  #}
         <span class="login">
-            <h1>Programme session</h1>
+            <h2>Programme session</h2>
             <div class="row">
                 {% for prog in sessions.programmes %}
                     <div class="card">
@@ -70,22 +83,6 @@
                     </div>
                 {% endfor %}
               </div>
-    <div class="section3">
-        {# affiche detail  #}
-        <h1>Détail réservation</h1>
-            <div class="row">
-                {% for placeSession in placeSessions %}
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Nb places : <br>{{ placeSession.nbPlace }}</h5>
-                            <h5 class="card-title">Nb places reservées : {{ placeSession.nbInscrit }}</h5>
-                            <h5 class="card-title">Nb places restantes : {{ placeSession.nbPlacesRestantes }}</h5>
-                            
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-    </div>
     <div class="section4">
         {# ajoute programme #}
         <span class="login">
@@ -100,15 +97,6 @@
                 </select>
                 <button class="btn btn-secondary edit" type="submit">Ajouter</button>
             </form>
-            
-            {# {% if app.user %}
-                <h1>Ajouter un programme</h1> #}
-                {# formulaire ajout programme  #}
-                {# {{ form_start(formAddProgramme) }}
-                {{ form_row(formAddProgramme.duree) }}<br> #}
-                {# {{ form_row(formAddProgramme.session) }}<br> #}
-                {# {{ form_row(formAddProgramme.section) }}<br>
-                {{ form_end(formAddProgramme) }} #}
         </span>
 
         {# message flash succès ajout  #}

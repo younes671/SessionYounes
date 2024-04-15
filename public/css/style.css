@@ -34,6 +34,14 @@ h1{
     color: var(--text-color);
 }
 
+
+h2{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
+}
+
 h5{
     margin: 20px;
     display: flex;
@@ -95,6 +103,13 @@ h4{
 .fa-pen-to-square:hover {
     font-size: 24px; 
     transition: font-size 0.3s; 
+}
+
+.detail-place{
+    height: 35px;
+    width: 500px;
+    background-color: #e1e1e1;
+    border-radius: 10px;
 }
 
 .lien{
@@ -328,14 +343,4 @@ label{
 
 
 
-    
-
-/* .detail{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: 350px;
-    width: 500px;
-    background-color: aqua;
-} */
+ 
