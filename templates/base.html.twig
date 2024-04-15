@@ -16,10 +16,15 @@
         <div class="nav-bar">
             {% if app.user %}
             <div class="nav">
-                <a class="lien-nav" href="{{ path('app_logout') }}">Déconnexion</a>
-                <a class="lien-nav" href="{{ path('app_session') }}">Accueil</a>
-                <a class="lien-nav" href="{{ path('app_stagiaire') }}">Liste stagiaire</a>
-                <a class="lien-nav" href="{{ path('app_section') }}">Liste modules</a>
+                    <div class="lien">
+                        <a class="lien-nav" href="{{ path('app_logout') }}">Déconnexion</a>
+                        <a class="lien-nav" href="{{ path('app_session') }}">Accueil</a>
+                        <a class="lien-nav" href="{{ path('app_stagiaire') }}">Liste stagiaire</a>
+                        <a class="lien-nav" href="{{ path('app_section') }}">Liste modules</a>
+                    </div>
+                    <div class="pseudo">
+                        <p class="lien-nav">{{ app.user.pseudo ~ ' '}}<i class="fa-solid fa-user"></i></p> 
+                    </div>
             </div>
             {% else %}
             <div class="connection">

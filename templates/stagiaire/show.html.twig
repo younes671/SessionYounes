@@ -4,34 +4,24 @@
 
 {% block body %}
         {% if app.user %}
-        <h1>Fiche stagiaire</h1>
 
         {# affichage détail stagiaire  #}
-        <div class="list">
-                <table class="table-bordered">
-                    <thead>
-                      <tr>
-                        <th class="th" scope="col">Nom</th>
-                        <th class="th" scope="col">Date de naissance</th>
-                        <th class="th" scope="col">Courriel</th>
-                        <th class="th" scope="col">Adresse</th>
-                        <th class="th" scope="col">Code postale</th>
-                        <th class="th" scope="col">Ville</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                
-                        <tr>
-                          <td>{{ stagiaire }}</td>
-                          <td>{{ stagiaire.dateNaissance|date('d-m-Y') }}</td>
-                          <td>{{ stagiaire.email }}</td>
-                          <td>{{ stagiaire.adresse }}</td>
-                          <td>{{ stagiaire.cp }}</td> 
-                          <td>{{ stagiaire.ville }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Fiche stagiaire</h1>
+                        <h5 class="card-title">{{ stagiaire.nom }} {{ stagiaire.prenom }}</h5>
+                        <p class="ligne">Courriel : {{ stagiaire.email }} </p>
+                        <p>Adresse : {{ stagiaire.adresse }} </p>
+                        <p class="ligne">{{ stagiaire.cp ~ ' ' ~ stagiaire.ville|capitalize }} </p>
+                        <div class="button-card">
+                          {# <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}" class="btn btn-primary">Voir détails</a> #}
+                          <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                          <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+        </div>
         {% else %}
             <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
     {% endif %}
@@ -46,11 +36,7 @@
             {% for session in stagiaire.sessions %}
                 {% for inscription in session.inscriptions %}
                     {% if inscription.id == stagiaire.id %}
-                    <ul>
-                        <li>
                         <p class="titre"><h5> <a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }} </a>  {{ ' ( du ' ~ session.dateDebut|date('d-m-Y') ~ ' au ' ~ session.dateFin|date('d-m-Y') ~ ' ) ' }}<a href="{{ path('deleteStagiaire_session', {'id': session.id, 'inscriptionId': inscription.id}) }}"><i class="fa-solid fa-trash"></i></a>
-                        </li>
-                    </ul>
                     {% endif %}
                 {% endfor %}
         {% endfor %}

@@ -33,18 +33,21 @@
                 {% endif %}
             </span>
         
-            <span class="login">
+           
                 {# Formulaire inscription session #}
-                <form action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
-                    <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
-                    <select class="edit" name="stagiaire">
-                        {% for nonInscrit in nonInscrits %}
-                            <option class="edit"   value="{{ nonInscrit.id }}">{{ nonInscrit.nom }} {{ nonInscrit.prenom }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn btn-secondary edit" type="submit">Ajouter</button>
-                </form>
-            </span>
+                {% if nonInscrits | length == 0  %}
+                    <h5>Tous les stagiaires sont inscrit à la session</h5>
+                    {% else %}
+                    <form class="form" action="{{ path('addStagiaire_session', {'id': sessions.id}) }}" method="post">
+                        <label for="select">Veuillez selectionnez le stagiaire pour l'ajouter à la liste</label><br>
+                            <select class="edit-1" name="stagiaire">
+                                {% for nonInscrit in nonInscrits %}
+                                    <option class="edit-1"   value="{{ nonInscrit.id }}">{{ nonInscrit.nom }} {{ nonInscrit.prenom }}</option>
+                                {% endfor %}
+                            </select>
+                        <button class="btn btn-secondary edit-1" type="submit">Ajouter</button>
+                    </form>
+                {% endif %}
         </div>
     <div class="section2">
         {# affiche programme session  #}
@@ -86,7 +89,7 @@
     <div class="section4">
         {# ajoute programme #}
         <span class="login">
-            <form action="{{ path('addModule_session', {'id': sessions.id}) }}" method="post">
+            <form  action="{{ path('addModule_session', {'id': sessions.id}) }}" method="post">
                 <label for="duree">Durée</label><br>
                 <input class="edit" type="number" name="duree">
                 <label for="select">Veuillez sélectionner le module pour l'ajouter à la liste</label><br>

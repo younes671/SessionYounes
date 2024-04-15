@@ -38,6 +38,7 @@ h5{
     margin: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
     color: var(--text-color);
 }
 
@@ -64,6 +65,8 @@ h4{
 .nav{
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .fa-users{
@@ -94,7 +97,25 @@ h4{
     transition: font-size 0.3s; 
 }
 
+.lien{
+    display: flex;
+    align-items: center;
+}
+
+.pseudo{
+    display: flex;
+    align-items: center;
+}
+
 .lien-nav{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bolder;
+    color: white;
+    margin: 10px;
+}
+
+.fa-user{
     text-decoration: none;
     font-size: 18px;
     font-weight: bolder;
@@ -179,12 +200,33 @@ td{
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
     border-radius: 5px;
     height: 35px;
     border: none;
     padding: 5px;
     margin: 5px;
+}
+
+.edit-1{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 15%;
+    border-radius: 5px;
+    height: 35px;
+    border: none;
+    padding: 5px;
+    margin: 5px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 

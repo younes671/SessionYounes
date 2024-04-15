@@ -17,7 +17,7 @@
             
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ stagiaire.nom }} {{ stagiaire.prenom }}</h5>
+                        <h5 class="card-title"><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</a></h5>
                         <p class="ligne">Courriel : {{ stagiaire.email }} </p>
                         <p>Adresse : {{ stagiaire.adresse }} </p>
                         <p class="ligne">{{ stagiaire.cp ~ ' ' ~ stagiaire.ville|capitalize }} </p>
