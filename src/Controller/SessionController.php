@@ -184,8 +184,41 @@ class SessionController extends AbstractController
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
-
     
+    #[Route('/session/{id}/addModule', name: 'addModule_session')]
+public function addModule(Session $session, Request $request, SectionRepository $sectionRepository, EntityManagerInterface $entityManager)
+{
+    // Vérifier si la session existe
+    if (!$session) {
+        throw $this->createNotFoundException('La session n\'existe pas.');
+    }
+
+    // Récupérer les données du formulaire
+    $moduleId = $request->request->get('module');
+    $duree = $request->request->get('duree');
+
+    // Récupérer le module en fonction de l'ID
+    $module = $sectionRepository->find($moduleId);
+
+    // Vérifier si le module existe
+    if (!$module) {
+        throw $this->createNotFoundException('Le module n\'existe pas.');
+    }
+
+    // Créer un nouvel objet Programme
+    $programme = new Programme();
+    $programme->setSession($session);
+    $programme->setSection($module);
+    $programme->setDuree($duree);
+
+    // Enregistrer le programme en base de données
+    $entityManager->persist($programme);
+    $entityManager->flush();
+
+    // Rediriger vers une page de confirmation ou autre
+    return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+}
+
     
 
     // supprime programme d'une session 

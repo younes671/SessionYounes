@@ -4,35 +4,30 @@
 
 {% block body %}
 
-{% if app.user %}
-<div class="login">
+    {% if app.user %}
+        <div class="login">
 
-  <h1>Liste modules</h1>
-  
-  <a class="btn btn-primary" href="{{ path('new_section') }}">Ajouter une session</a><br>
-</div>
+          <h1>Liste modules</h1>
+          
+          <a class="btn btn-secondary" href="{{ path('new_section') }}">Ajouter une session</a><br>
+        </div>
 
-<div class="list">
+
   {# affichage liste session  #}
-            <table class="table-bordered">
-                <thead>
-                  <tr>
-                    <th class="th" scope="col">Intitulé module</th>
-                    <th class="th" scope="col">Supprimer</th>
-                    <th class="th" scope="col">Editer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for section in sections %}
-                    <tr>
-                      <td> {{ section.nomSection }} </td>
-                      <td><a href="{{ path('deleteModule_section', {'id': section.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
-                      <td><a href="{{ path('edit_section', {'id': section.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>                      
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    </div>
+          <div class="row">
+            {% for section in sections %}
+            
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ section.nomSection }}</h5>
+                        <div class="button-card">
+                          <a href="{{ path('edit_section', {'id': section.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                          <a href="{{ path('deleteModule_section', {'id': section.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
 {% else %}
     <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
 {% endif %}

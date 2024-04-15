@@ -5,15 +5,30 @@
 {% block body %}
     {% if app.user %}
     <div class="login">
-
-      <h1>Liste session</h1>
+      <h1>Bonjour {{ app.user.pseudo }}  </h1>
       
-      <a class="btn btn-primary" href="{{ path('new_session') }}">Ajouter une session</a><br>
+      <a class="btn btn-secondary" href="{{ path('new_session') }}">Ajouter une session</a><br>
     </div>
     
-    <div class="list">
       {# affichage liste session  #}
-                <table class="table-bordered">
+
+      <div class="row">
+        {% for session in sessions %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ session.titre }}</h5>
+                    <p class="ligne">Période du : {{ session.dateDebut|date('d-m-Y') ~ ' au ' ~ session.dateFin|date('d-m-Y') }}</p>
+                    <div class="button-card">
+                      <a href="{{ path('show_session', {'id': session.id}) }}"><i class="fas fa-info-circle"></i></a>
+                      <a href="{{ path('edit_session', {'id': session.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a href="{{ path('listInscription_session', {'id': session.id}) }}"><i class="fa-solid fa-users"></i></a>
+                      <a href="{{ path('delete_session', {'id': session.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+                {# <table class="table-bordered">
                     <thead>
                       <tr>
                         <th class="th" scope="col">Intitulé et date Session</th>
@@ -33,7 +48,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
-        </div>
+        </div> #}
     {% else %}
         <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
     {% endif %}

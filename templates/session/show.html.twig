@@ -4,7 +4,7 @@
 
 {% block body %}
         {% if app.user %}
-<div class="container">
+<div class="">
     <div class="section1">
         <span class="login">
             <h1>Liste stagiaire inscrit</h1>
@@ -15,24 +15,21 @@
                 {% if inscriptions | length == 0 %}
                     <p>Pas d'inscrits</p>
                 {% else %}
-                    <span>
-                        <table class="table-bordered">
-                            <thead>
-                                <tr>
-                                <th class="th" scope="col">Stagiaire</th>
-                                <th class="th" scope="col">Supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>    
-                                {% for inscrit in sessions.inscriptions %}
-                                  <tr>
-                                    <td><a href="{{ path('show_stagiaire', {'id': inscrit.id}) }}">{{ inscrit }}</a> </td>
-                                    <td><a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
-                                  </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </span>
+                <div class="row">
+                    {% for inscrit in sessions.inscriptions %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{{ path('show_stagiaire', {'id': inscrit.id}) }}">{{ inscrit }}</a></h5>
+                                <p class="ligne">Courriel : {{ inscrit.email }} </p>
+                                <p>Adresse : {{ inscrit.adresse }} </p>
+                                <p class="ligne">{{ inscrit.cp ~ ' ' ~ inscrit.ville|capitalize }} </p>
+                                <div class="button-card">
+                                    <a href="{{ path('deleteStagiaire_session', {'id': sessions.id, 'inscriptionId': inscrit.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                  </div>
                 {% endif %}
             </span>
         
@@ -45,7 +42,7 @@
                             <option class="edit"   value="{{ nonInscrit.id }}">{{ nonInscrit.nom }} {{ nonInscrit.prenom }}</option>
                         {% endfor %}
                     </select>
-                    <button class="btn btn-primary edit" type="submit">Ajouter</button>
+                    <button class="btn btn-secondary edit" type="submit">Ajouter</button>
                 </form>
             </span>
         </div>
@@ -53,65 +50,62 @@
         {# affiche programme session  #}
         <span class="login">
             <h1>Programme session</h1>
-            <span class="list">
-                <table class="table-bordered">
-                    <thead>
-                        <tr>
-                        <th class="th" scope="col">Module</th>
-                        <th class="th" scope="col">Durée en jour</th>
-                        <th class="th" scope="col">Supprimer</th>
-                        </tr>
-                    </thead>
-                    <tbody>    
-                        {% for prog in sessions.programmes %}
-                        <tr>
-                            <td> {{ prog.section.nomSection }} </td>
-                            <td>{{ prog.duree }}</td>
-                            <td><a href="{{ path('deleteProgramme_session', {'id': sessions.id, 'programmeId': prog.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </span>
-        </span>
-    </div>
+            <div class="row">
+                {% for prog in sessions.programmes %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ prog.section.nomSection }}</h5>
+                            <p class="ligne">Durée : {{ prog.duree }} {% if prog.duree > 1 %}
+                                jours
+                            {% else %}
+                                jour
+                            {% endif %} </p>
+                            <div class="button-card">
+                                <a href="{{ path('deleteProgramme_session', {'id': sessions.id, 'programmeId': prog.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+              </div>
     <div class="section3">
         {# affiche detail  #}
-        <span class="login">
-            <h1>Détail réservation</h1>
-            <span class="list">
-                <table class="table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="th" scope="col">Nb places</th>
-                            <th class="th" scope="col">Nb places reservées</th>
-                            <th class="th" scope="col">Nb places restantes</th>
-                        </tr>
-                    </thead>
-                    <tbody>    
-                        {% for placeSession in placeSessions %}
-                        <tr>
-                            <td>{{ placeSession.nbPlace }}</td>
-                            <td>{{ placeSession.nbInscrit }}</td>
-                            <td>{{ placeSession.nbPlacesRestantes }}</td> 
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </span>
-        </span>
+        <h1>Détail réservation</h1>
+            <div class="row">
+                {% for placeSession in placeSessions %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Nb places : <br>{{ placeSession.nbPlace }}</h5>
+                            <h5 class="card-title">Nb places reservées : {{ placeSession.nbInscrit }}</h5>
+                            <h5 class="card-title">Nb places restantes : {{ placeSession.nbPlacesRestantes }}</h5>
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
     </div>
     <div class="section4">
         {# ajoute programme #}
         <span class="login">
-            {% if app.user %}
-                <h1>Ajouter un programme</h1>
+            <form action="{{ path('addModule_session', {'id': sessions.id}) }}" method="post">
+                <label for="duree">Durée</label><br>
+                <input class="edit" type="number" name="duree">
+                <label for="select">Veuillez sélectionner le module pour l'ajouter à la liste</label><br>
+                <select class="edit" name="module">
+                    {% for findProgNoSession in findProgsNoSession %}
+                        <option class="edit" value="{{ findProgNoSession.id }}">{{ findProgNoSession.nomSection }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-secondary edit" type="submit">Ajouter</button>
+            </form>
+            
+            {# {% if app.user %}
+                <h1>Ajouter un programme</h1> #}
                 {# formulaire ajout programme  #}
-                {{ form_start(formAddProgramme) }}
-                {{ form_row(formAddProgramme.duree) }}<br>
+                {# {{ form_start(formAddProgramme) }}
+                {{ form_row(formAddProgramme.duree) }}<br> #}
                 {# {{ form_row(formAddProgramme.session) }}<br> #}
-                {{ form_row(formAddProgramme.section) }}<br>
-                {{ form_end(formAddProgramme) }}
+                {# {{ form_row(formAddProgramme.section) }}<br>
+                {{ form_end(formAddProgramme) }} #}
         </span>
 
         {# message flash succès ajout  #}
@@ -126,8 +120,5 @@
                     <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
                 {% endif %}
                 
-        {% else %}
-            <meta http-equiv="refresh" content="0;url={{ path('app_login') }}">
-        {% endif %}
-
+       
 {% endblock %}

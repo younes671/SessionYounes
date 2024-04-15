@@ -47,7 +47,7 @@ class StagiaireType extends AbstractType
                 ]])
             ->add('ville', TextType::class, [
                 'attr' => [
-                    'class' => 'edit'
+                    'class' => ' edit'
                 ]])
             // ->add('sessions', EntityType::class, [
             //     'class' => Session::class,
@@ -56,7 +56,7 @@ class StagiaireType extends AbstractType
             // ])
             ->add('valider', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control btn btn-primary'
+                    'class' => 'form-control btn btn-secondary'
                 ]])
         ;
     }
