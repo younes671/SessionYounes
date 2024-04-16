@@ -34,6 +34,12 @@ class Session
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $titre = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    private ?Formation $formation = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    private ?Formateur $formateur = null;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
@@ -162,4 +168,30 @@ class Session
     {
         return $this->nbPlace - $this->getNbInscrit();
     }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): static
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    public function getFormateur(): ?Formateur
+    {
+        return $this->formateur;
+    }
+
+    public function setFormateur(?Formateur $formateur): static
+    {
+        $this->formateur = $formateur;
+
+        return $this;
+    }
+
+   
 }
