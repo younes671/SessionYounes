@@ -20,7 +20,8 @@ class ProgrammeType extends AbstractType
         $builder
             ->add('duree', NumberType::class, [
                 'attr' => [
-                    'class' => 'edit'
+                    'class' => 'edit',
+                    'label' => 'Durée',
                 ]])
             ->add('session', NumberType::class, [
                 'attr' => [
