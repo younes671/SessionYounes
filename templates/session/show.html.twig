@@ -7,7 +7,9 @@
 <div class="">
     <div class="section1">
         <span class="login">
-            <h1> {{ sessions.titre ~ ' ( du ' ~ sessions.dateDebut|date('d-m-Y') ~ ' au ' ~ sessions.dateFin|date('d-m-Y') ~ ' ) ' }} </h1>
+            <h1>Formation {{ sessions.formation.intitule }} </h1>
+            <h2> {{ sessions.titre ~ ' ( du ' ~ sessions.dateDebut|date('d-m-Y') ~ ' au ' ~ sessions.dateFin|date('d-m-Y') ~ ' ) ' }} </h2>
+            <h3>Dispensée par : {{ sessions.formateur.nom ~ ' ' ~ sessions.formateur.prenom }} </h3>
             {% for placeSession in placeSessions %}
             <div class="">
                 <div class="card-body">
@@ -86,7 +88,7 @@
     <div class="section4">
         {# ajoute programme #}
         <span class="login">
-            <form  action="{{ path('addModule_session', {'id': sessions.id}) }}" method="post">
+            <form class="form-prog"  action="{{ path('addModule_session', {'id': sessions.id}) }}" method="post">
                 <label for="duree">Durée</label><br>
                 <input class="edit" type="number" name="duree">
                 <label for="select">Veuillez sélectionner le module pour l'ajouter à la liste</label><br>
