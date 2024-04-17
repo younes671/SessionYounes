@@ -375,7 +375,7 @@ label{
 }
 
 .nav-link:hover{
-    color: #b7b7b7;
+    color: rgb(178, 246, 248);
 }
 
 .navbar-nav{
@@ -435,6 +435,10 @@ label{
 
 .navbar-toggler:focus{
     box-shadow: none;
+}
+
+.navbar-toggler{
+    border-color: #ffffff;   
 }
 
  
