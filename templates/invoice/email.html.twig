@@ -1,0 +1,8 @@
+<h1>Facture</h1>
+<p>Voici votre facture :</p>
+<ul>
+    <li>Montant payé : {{ montant }}</li>
+    <li>Payé en intégralité : {% if payeEnIntegralite %}Oui{% else %}Non{% endif %}</li>
+    <li>Nombre de paiements : {{ nombrePaiements }}</li>
+</ul>
+<p>Merci de votre attention.</p>

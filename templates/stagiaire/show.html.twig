@@ -18,6 +18,7 @@
                           {# <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}" class="btn btn-primary">Voir détails</a> #}
                           <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                           <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                          <a href="{{ path('invoice', {'id': stagiaire.id}) }}"><i class="fa-solid fa-file-invoice-dollar"></i></a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,9 @@
         <h1>Sessions prévues</h1>
             <h3>Aucune session prévue</h3>
         {% else %}
-            <h1>Sessions prévues</h1>
+            <h1>Détail paiement</h1>
+
+            <h5>Montant payé :  {{ stagiaire.montantPaye ~ ' €'}} </h5>
             {# affiche session stagiaire prévue  #}
             {% for session in stagiaire.sessions %}
                 {% for inscription in session.inscriptions %}
@@ -41,6 +44,29 @@
                 {% endfor %}
         {% endfor %}
         {% endif %}
+
+        <h1>Invoice</h1>
+
+        <p>Montant payé : {{ stagiaire.montantPaye }}</p>
+        <p>Payé en intégralité : {{ stagiaire.payeEnIntegralite ? 'Oui' : 'Non' }}</p>
+        {% if not stagiaire.payeEnIntegralite %}
+            <p>Nombre de paiements : {{ stagiaire.nombrePaiements }}</p>
+        {% endif %}
+        <form action="{{ path('send_invoice', {'id': stagiaire.id}) }}" method="post">
+            <label for="montant">Montant:</label>
+            <input type="text" id="montant" name="montantPaye" required>
+
+            <label for="payeEnIntegralite">Payé en intégralité:</label>
+            <input type="checkbox" id="payeEnIntegralite" name="payeEnIntegralite" value="1">
+
+            <div id="nombrePaiementsDiv">
+                <label for="nombrePaiements">Nombre de paiements:</label>
+                <input type="number" id="nombrePaiements" name="nombrePaiements" min="1">
+            </div>
+            <input type="hidden" name="stagiaireId" value="{{ stagiaire.id }}">
+            <button type="submit">Envoyer Facture</button>
+        </form>
+
 
 
     

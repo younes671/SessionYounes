@@ -40,6 +40,15 @@ class Stagiaire
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'inscriptions')]
     private Collection $sessions;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $montantPaye = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $payeEnIntegralite = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $nombrePaiements = null;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -165,5 +174,41 @@ class Stagiaire
     public function __toString()
     {
         return $this->prenom . ' ' . $this->nom;
+    }
+
+    public function getMontantPaye(): ?float
+    {
+        return $this->montantPaye;
+    }
+
+    public function setMontantPaye(?float $montantPaye): static
+    {
+        $this->montantPaye = $montantPaye;
+
+        return $this;
+    }
+
+    public function getPayeEnIntegralite(): ?float
+    {
+        return $this->payeEnIntegralite;
+    }
+
+    public function setPayeEnIntegralite(?float $payeEnIntegralite): static
+    {
+        $this->payeEnIntegralite = $payeEnIntegralite;
+
+        return $this;
+    }
+
+    public function getNombrePaiements(): ?int
+    {
+        return $this->nombrePaiements;
+    }
+
+    public function setNombrePaiements(?int $nombrePaiements): static
+    {
+        $this->nombrePaiements = $nombrePaiements;
+
+        return $this;
     }
 }
