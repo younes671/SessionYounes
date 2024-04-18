@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8bb25485966a446bf370ee63159d11b",
+    "content-hash": "a4108ea3d56be59ea8d37194a77a2d6d",
     "packages": [
         {
             "name": "composer/semver",
@@ -1374,6 +1374,73 @@
             "time": "2023-10-06T06:47:41+00:00"
         },
         {
+            "name": "knplabs/knp-snappy",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/snappy.git",
+                "reference": "98468898b50c09f26d56d905b79b0f52a2215da6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/98468898b50c09f26d56d905b79b0f52a2215da6",
+                "reference": "98468898b50c09f26d56d905b79b0f52a2215da6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/log": "^2.0||^3.0",
+                "symfony/process": "^5.0||^6.0||^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "pedrotroller/php-cs-custom-fixer": "^2.19",
+                "phpstan/phpstan": "^1.0.0",
+                "phpstan/phpstan-phpunit": "^1.0.0",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\Snappy\\": "src/Knp/Snappy"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KNP Labs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
+                }
+            ],
+            "description": "PHP library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
+            "homepage": "http://github.com/KnpLabs/snappy",
+            "keywords": [
+                "knp",
+                "knplabs",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "support": {
+                "issues": "https://github.com/KnpLabs/snappy/issues",
+                "source": "https://github.com/KnpLabs/snappy/tree/v1.5.0"
+            },
+            "time": "2023-12-18T09:12:11+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.5.0",
             "source": {
@@ -1994,6 +2061,65 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
             "time": "2021-07-14T16:46:02+00:00"
+        },
+        {
+            "name": "swiftmailer/swiftmailer",
+            "version": "v5.4.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/181b89f18a90f8925ef805f950d47a7190e9b950",
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1",
+                "symfony/phpunit-bridge": "~3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "lib/swift_required.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Corbyn"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "https://swiftmailer.symfony.com",
+            "keywords": [
+                "email",
+                "mail",
+                "mailer"
+            ],
+            "support": {
+                "issues": "https://github.com/swiftmailer/swiftmailer/issues",
+                "source": "https://github.com/swiftmailer/swiftmailer/tree/v5.4.12"
+            },
+            "abandoned": "symfony/mailer",
+            "time": "2018-07-31T09:26:32+00:00"
         },
         {
             "name": "symfony/asset",
@@ -4137,16 +4263,16 @@
         },
         {
             "name": "symfony/mailer",
-            "version": "v6.4.4",
+            "version": "v6.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "791c5d31a8204cf3db0c66faab70282307f4376b"
+                "reference": "677f34a6f4b4559e08acf73ae0aec460479e5859"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/791c5d31a8204cf3db0c66faab70282307f4376b",
-                "reference": "791c5d31a8204cf3db0c66faab70282307f4376b",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/677f34a6f4b4559e08acf73ae0aec460479e5859",
+                "reference": "677f34a6f4b4559e08acf73ae0aec460479e5859",
                 "shasum": ""
             },
             "require": {
@@ -4197,7 +4323,7 @@
             "description": "Helps sending emails",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/mailer/tree/v6.4.4"
+                "source": "https://github.com/symfony/mailer/tree/v6.4.6"
             },
             "funding": [
                 {
@@ -4213,7 +4339,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-03T21:33:47+00:00"
+            "time": "2024-03-27T21:14:17+00:00"
         },
         {
             "name": "symfony/messenger",
@@ -6380,6 +6506,125 @@
                 }
             ],
             "time": "2024-02-01T13:16:41+00:00"
+        },
+        {
+            "name": "symfony/swiftmailer-bridge",
+            "version": "v2.8.52",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/swiftmailer-bridge.git",
+                "reference": "9f68b7c4ac6a9f50aaa2b3f79412f7727df229e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bridge/zipball/9f68b7c4ac6a9f50aaa2b3f79412f7727df229e5",
+                "reference": "9f68b7c4ac6a9f50aaa2b3f79412f7727df229e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "swiftmailer/swiftmailer": ">=4.2.0,<6.0-dev"
+            },
+            "suggest": {
+                "symfony/http-kernel": ""
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\Swiftmailer\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Swiftmailer Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/swiftmailer-bridge/tree/v2.8.52"
+            },
+            "abandoned": "symfony/swiftmailer-bundle",
+            "time": "2018-07-26T09:03:18+00:00"
+        },
+        {
+            "name": "symfony/swiftmailer-bundle",
+            "version": "v2.3.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/swiftmailer-bundle.git",
+                "reference": "970b13d01871207e81d17b17ddda025e7e21e797"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
+                "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "swiftmailer/swiftmailer": ">=4.2.0,~5.0",
+                "symfony/swiftmailer-bridge": "~2.1"
+            },
+            "require-dev": {
+                "symfony/config": "~2.1",
+                "symfony/dependency-injection": "~2.1",
+                "symfony/http-kernel": "~2.1",
+                "symfony/yaml": "~2.1"
+            },
+            "suggest": {
+                "psr/log": "Allows logging"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bundle\\SwiftmailerBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony SwiftmailerBundle",
+            "homepage": "http://symfony.com",
+            "support": {
+                "issues": "https://github.com/symfony/swiftmailer-bundle/issues",
+                "source": "https://github.com/symfony/swiftmailer-bundle/tree/v2.3.8"
+            },
+            "abandoned": "symfony/mailer",
+            "time": "2014-12-01T17:44:50+00:00"
         },
         {
             "name": "symfony/translation",
