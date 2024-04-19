@@ -132,7 +132,7 @@ class StagiaireController extends AbstractController
      
          // Création et envoi de l'e-mail
          $email = (new Email())
-             ->from(new Address('your_email@example.com', 'Your Name'))
+             ->from(new Address('d8275500@gmail.com', 'Your Name'))
              ->to($email)
              ->subject('Invoice')
              ->attachFromPath($pdfFilePath) // Attache le fichier PDF à l'e-mail
@@ -140,6 +140,7 @@ class StagiaireController extends AbstractController
     //  dump($mailer); exit;
          // Envoyer l'e-mail
          $sentEmailCount = $mailer->send($email);
+# 1C8GZPYQLDFNUD36WK4CZG8G
      
          try {
             $sentEmailCount = $mailer->send($email);
