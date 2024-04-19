@@ -34,7 +34,12 @@
         {% else %}
             <h1>Détail paiement</h1>
 
-            <h5>Montant payé :  {{ stagiaire.montantPaye ~ ' €'}} </h5>
+            <h5>Montant payé :  {{ stagiaire.montantPaye ~ ' €'}}</h5>
+                <h5>Payé en intégralité : {{ stagiaire.payeEnIntegralite ? 'Oui' : 'Non' }}</h5>
+                {% if not stagiaire.payeEnIntegralite %}
+                    <h5>Nombre de paiements : {{ stagiaire.nombrePaiements }}</h5>
+                {% endif %}
+            </h5>
             {# affiche session stagiaire prévue  #}
             {% for session in stagiaire.sessions %}
                 {% for inscription in session.inscriptions %}
@@ -44,31 +49,5 @@
                 {% endfor %}
         {% endfor %}
         {% endif %}
-
-        <h1>Invoice</h1>
-
-        <p>Montant payé : {{ stagiaire.montantPaye }}</p>
-        <p>Payé en intégralité : {{ stagiaire.payeEnIntegralite ? 'Oui' : 'Non' }}</p>
-        {% if not stagiaire.payeEnIntegralite %}
-            <p>Nombre de paiements : {{ stagiaire.nombrePaiements }}</p>
-        {% endif %}
-        <form action="{{ path('send_invoice', {'id': stagiaire.id}) }}" method="post">
-            <label for="montant">Montant:</label>
-            <input type="text" id="montant" name="montantPaye" required>
-
-            <label for="payeEnIntegralite">Payé en intégralité:</label>
-            <input type="checkbox" id="payeEnIntegralite" name="payeEnIntegralite" value="1">
-
-            <div id="nombrePaiementsDiv">
-                <label for="nombrePaiements">Nombre de paiements:</label>
-                <input type="number" id="nombrePaiements" name="nombrePaiements" min="1">
-            </div>
-            <input type="hidden" name="stagiaireId" value="{{ stagiaire.id }}">
-            <button type="submit">Envoyer Facture</button>
-        </form>
-
-
-
-    
 
 {% endblock %}

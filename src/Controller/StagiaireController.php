@@ -105,8 +105,9 @@ class StagiaireController extends AbstractController
          $montantPaye = $request->request->get('montantPaye');
          $payeEnIntegraliteValue = $request->request->get('payeEnIntegralite', false);
          $payeEnIntegralite = $payeEnIntegraliteValue !== null ? (float) $payeEnIntegraliteValue : null;
-         $nombrePaiements = $request->request->get('nombrePaiements', 1);
-     
+         $nombrePaiements = $stagiaire->getnombrePaiements();
+
+        
          $stagiaire->setMontantPaye($montantPaye);
          $stagiaire->setPayeEnIntegralite($payeEnIntegralite);
          $stagiaire->setNombrePaiements($nombrePaiements);
@@ -123,7 +124,7 @@ class StagiaireController extends AbstractController
          $pdfContent = $mpdf->Output('', 'S');
      
          // Chemin pour sauvegarder le fichier PDF dans le dossier Documents
-         $pdfDirectory = 'C:\\Users\\youne\\OneDrive\\Documents\\';
+         $pdfDirectory = 'c:\Users\YounesseALAMRI\OneDrive - Elan Formation\Documents\facturePDF';
          $pdfFileName = 'invoice.pdf';
          $pdfFilePath = $pdfDirectory . $pdfFileName;
      
@@ -132,26 +133,20 @@ class StagiaireController extends AbstractController
      
          // Création et envoi de l'e-mail
          $email = (new Email())
-             ->from(new Address('d8275500@gmail.com', 'Your Name'))
+             ->from(new Address('d8275500@gmail.com', 'Admin'))
              ->to($email)
              ->subject('Invoice')
              ->attachFromPath($pdfFilePath) // Attache le fichier PDF à l'e-mail
              ->html($html); // Utilisation du contenu HTML directement
-    //  dump($mailer); exit;
-         // Envoyer l'e-mail
-         $sentEmailCount = $mailer->send($email);
-# 1C8GZPYQLDFNUD36WK4CZG8G
-     
+
          try {
-            $sentEmailCount = $mailer->send($email);
+             // Envoyer l'e-mail
+
+        $mailer->send($email);
         
-            if ($sentEmailCount > 0) {
                 // Le fichier PDF a été généré avec succès et l'e-mail a été envoyé
                 echo 'Facture générée et e-mail envoyé avec succès.';
-            } else {
-                // Il y a eu une erreur lors de l'envoi de l'e-mail
-                echo 'Erreur lors de l\'envoi de l\'e-mail. Aucun destinataire n\'a accepté le message.';
-            }
+       
         } catch (\Exception $e) {
             echo 'Une exception s\'est produite lors de l\'envoi de l\'e-mail : ' . $e->getMessage();
         }
@@ -161,6 +156,7 @@ class StagiaireController extends AbstractController
          return $this->render('stagiaire/show.html.twig', [
              'stagiaire' => $stagiaire
          ]);
+     
      }
 
      

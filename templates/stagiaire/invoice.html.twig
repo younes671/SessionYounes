@@ -6,26 +6,23 @@
     
 <h1>Invoice</h1>
 
-<p>Montant payé : {{ stagiaire.montantPaye }}</p>
-<p>Payé en intégralité : {{ stagiaire.payeEnIntegralite ? 'Oui' : 'Non' }}</p>
-{% if not stagiaire.payeEnIntegralite %}
-    <p>Nombre de paiements : {{ stagiaire.nombrePaiements }}</p>
-{% endif %}
-<form action="{{ path('send_invoice', {'id': stagiaire.id}) }}" method="post">
+
+<span class="login">
+<form class="form-prog" action="{{ path('send_invoice', {'id': stagiaire.id}) }}" method="post">
     <label for="montant">Montant:</label>
-    <input type="text" id="montant" name="montantPaye" required>
+    <input class="edit" type="text" id="montant" name="montantPaye" required>
 
     <label for="payeEnIntegralite">Payé en intégralité:</label>
-    <input type="checkbox" id="payeEnIntegralite" name="payeEnIntegralite" value="1">
+    <input class="edit" type="checkbox" id="payeEnIntegralite" name="payeEnIntegralite" value="1">
 
     <div id="nombrePaiementsDiv">
         <label for="nombrePaiements">Nombre de paiements:</label>
-        <input type="number" id="nombrePaiements" name="nombrePaiements" min="1">
+        <input class="edit" type="number" id="nombrePaiements" name="nombrePaiements">
     </div>
-    <input type="hidden" name="stagiaireId" value="{{ stagiaire.id }}">
-    <button type="submit">Envoyer Facture</button>
+    <input class="edit" type="hidden" name="stagiaireId" value="{{ stagiaire.id }}">
+    <button class="btn btn-secondary edit" type="submit">Envoyer Facture</button>
 </form>
-
+</span>
 
 
     
