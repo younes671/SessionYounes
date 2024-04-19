@@ -441,4 +441,10 @@ label{
     border-color: #ffffff;   
 }
 
- 
+.requirement{
+    color: red;
+}
+
+.success{
+    color: green;
+}

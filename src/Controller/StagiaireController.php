@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use Mpdf\Mpdf;
+use App\Entity\User;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireType;
@@ -124,13 +125,13 @@ class StagiaireController extends AbstractController
          $pdfContent = $mpdf->Output('', 'S');
      
          // Chemin pour sauvegarder le fichier PDF dans le dossier Documents
-         $pdfDirectory = 'c:\Users\YounesseALAMRI\OneDrive - Elan Formation\Documents\facturePDF';
+         $pdfDirectory = 'C:\Users\youne\OneDrive\Documents\facture';
          $pdfFileName = 'invoice.pdf';
          $pdfFilePath = $pdfDirectory . $pdfFileName;
-     
+        
          // Sauvegarde du fichier PDF
          file_put_contents($pdfFilePath, $pdfContent);
-     
+         $user = new User;
          // Création et envoi de l'e-mail
          $email = (new Email())
              ->from(new Address('d8275500@gmail.com', 'Admin'))
